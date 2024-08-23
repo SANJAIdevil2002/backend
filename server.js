@@ -92,7 +92,10 @@ app.put("/todo/:id",async(req,res)=>{
             if(!updatedTodo){
                 return res.status(404).json({message:"Todo not found"})
             }
-            res.json(updatedTodo)
+            else{
+                res.status(200).json(updatedTodo);
+            }
+            
         }catch(error){
             console.log(error)
             res.status(500),json({message:error.message});
@@ -102,15 +105,20 @@ app.put("/todo/:id",async(req,res)=>{
 app.delete('/todo/:id',async(req,res)=>{
     try{
         const id=req.params.id;
-        await todoModel.findOneAndDelete(id);
-        res.status(204).end();
+     const deletedTodo= await todoModel.findByIdAndDelete(id);
+        if(!deletedTodo){
+            res.status(404).json({message:"Todo not found"});
+        }else{res.status(200).json(deletedTodo);
+            
+        }
+        
             }
             catch(error){
                 console.log(error)
                 res.status(500).json({message:error.message});
             }
 })
-const port=3001;
+const port=8000;
 app.listen(port,()=>{
     console.log("server is listening to port ",port);
 })
