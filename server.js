@@ -1,8 +1,10 @@
-// import express from 'express'
-// import mongoose from 'mongoose';
-// import { Schema,model } from 'mongoose';
- const express=require('express');
- const mongoose=require('mongoose')
+import express from 'express'
+import mongoose from 'mongoose';
+import { Schema,model } from 'mongoose';
+import cors from "cors";
+//  const express=require('express');
+//  const mongoose=require('mongoose');
+ 
  const app=express();
 // app.use(express.json())
 // let todo=[];
@@ -25,7 +27,8 @@
 //     console.log("server is listening to port "+port);
 // })
 
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
 let todo=[];
 mongoose.connect('mongodb://localhost:27017/vps-organisation').then(() => {
     console.log("hello every one")
