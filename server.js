@@ -79,7 +79,7 @@ app.get('/todo',async(req,res)=>{
             console.log(error)
             res.status(500).json({message:error.message});
         }
-        res.json(todos);
+    
    
 })
 app.put("/todo/:id",async(req,res)=>{
